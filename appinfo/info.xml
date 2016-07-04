@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<info>
+    <id>transmission</id>
+    <name>Transmission Web Client</name>
+    <description>An app to securely access Transmission web interfaces</description>
+    <licence>AGPL</licence>
+    <author>Galambos Máté</author>
+    <version>0.2</version>
+    <namespace>Transmission</namespace>
+    <category>tool</category>
+    <dependencies>
+        <owncloud min-version="8.1" />
+    </dependencies>
+</info>
