@@ -1,6 +1,9 @@
 # Transmission Web Client
 Place this app in **owncloud/apps/**
 
+## Note
+- Runs fine with nginx and php7
+
 ## Publish to App Store
 
 First get an account for the [App Store](http://apps.owncloud.com/) then run:
