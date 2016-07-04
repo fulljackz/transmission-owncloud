@@ -37,12 +37,25 @@ class ProxyResponse extends Response {
 		curl_setopt($c, CURLOPT_URL, "$proxied_host:$proxied_port/transmission/".$url);
 		curl_setopt($c, CURLOPT_HEADER,1);
 		$outheaders=[];
+
+// Infos 
+// http://www.popmartian.com/tipsntricks/2015/07/14/howto-use-php-getallheaders-under-fastcgi-php-fpm-nginx-etc/
+// http://php.net/manual/en/function.getallheaders.php
+
+		if (!function_exists('getallheaders')) {
+			function getallheaders() {
+				$headers = [];
+				foreach ($_SERVER as $name => $value) {
+					if (substr($name, 0, 5) == 'HTTP_') {
+						$headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
+						}
+				}
+				return $headers;
+			}
+		}
 		$outtmp=getallheaders();
-		unset($outtmp["Host"]);
-		unset($outtmp["Accept-Encoding"]);
-		unset($outtmp["Referer"]);
-		foreach($outtmp as $k => $v) {
-			$outheaders[]="$k: $v";
+		foreach ($outtmp as $k => $v) {
+			$outheaders[]="$k: $v";	
 		}
 		curl_setopt($c, CURLOPT_HTTPHEADER, $outheaders);
 		curl_setopt($c, CURLOPT_RETURNTRANSFER,1);
